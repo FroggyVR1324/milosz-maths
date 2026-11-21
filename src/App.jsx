@@ -27,7 +27,7 @@ function SnakeGame() {
       if (!next) return
       event.preventDefault()
       const current = directionRef.current
-      if (next.x !== -current.x || next.y !== -current.y) {
+      if (!(next.x === -current.x && next.y === -current.y)) {
         directionRef.current = next
         setDirection(next)
       }
