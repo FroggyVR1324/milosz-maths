@@ -112,3 +112,36 @@ footer { min-height: 85px; display: flex; align-items: center; justify-content: 
   .hero-bottom span:nth-child(2) { display: none; }
   .library-section { padding: 54px 0 62px; }
 }
+
+
+/* El Chato Snake */
+.game-card { display: block; width: 100%; margin-top: 22px; padding: 0; overflow: hidden; color: #25231f; background: #fffaf0; border: 2px solid #25231f; border-radius: 3px; text-align: left; box-shadow: 4px 4px 0 #25231f; transition: transform .15s, box-shadow .15s; }
+.game-card:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #25231f; }
+.game-card-art { height: 190px; position: relative; display: grid; place-items: center; overflow: hidden; background: #d8dfc8; border-bottom: 2px solid #25231f; }
+.game-card-art::before { content: ''; position: absolute; inset: 0; opacity: .25; background-image: linear-gradient(#66745c 1px, transparent 1px), linear-gradient(90deg, #66745c 1px, transparent 1px); background-size: 22px 22px; }
+.pixel-snake { z-index: 1; display: flex; align-items: center; gap: 5px; transform: rotate(-12deg); }
+.pixel-snake i, .pixel-snake b { display: block; width: 26px; height: 26px; background: #303c36; border: 2px solid #25231f; }
+.pixel-snake i:nth-child(2) { transform: translateY(-1px); }.pixel-snake i:nth-child(3) { transform: translateY(-1px); }.pixel-snake i:nth-child(4) { transform: translateY(5px); }
+.pixel-snake b { position: relative; width: 28px; height: 28px; background: #d94c32; border-radius: 50%; }
+.pixel-snake b::after { content: '••'; position: absolute; top: 2px; left: 5px; color: #fff8e9; font-size: 12px; letter-spacing: 2px; }
+.game-number, .play-stamp { position: absolute; z-index: 2; font: 10px 'DM Mono', monospace; letter-spacing: .08em; }
+.game-number { top: 14px; left: 16px; }.play-stamp { right: 14px; bottom: 13px; padding: 8px 10px; color: #fff8e9; background: #d94c32; border: 1.5px solid #25231f; transform: rotate(-3deg); }
+.game-card-info { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 17px 19px; }
+.game-card-info h3 { margin: 0 0 4px; font-size: 19px; letter-spacing: -.05em; }.game-card-info p { margin: 0; color: #777064; font-size: 12px; }
+.game-tag { padding: 7px 9px; border: 1px solid #aaa18f; font: 9px 'DM Mono', monospace; }
+.clear-filters { margin-top: 12px; padding: 9px 13px; color: #fff8e9; background: #25231f; border: 0; border-radius: 2px; font-size: 11px; }
+.snake-page { padding: 42px 0 70px; min-height: 650px; }
+.snake-topline { display: flex; align-items: center; justify-content: space-between; margin-bottom: 34px; }
+.back-button { padding: 8px 0; color: #6d675c; background: none; border: 0; font-size: 12px; }.back-button:hover { color: #d94c32; }
+.snake-label { color: #8c8476; font: 9px 'DM Mono', monospace; letter-spacing: .1em; }
+.snake-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 25px; }
+.snake-heading h2 { margin: 9px 0 0; font-size: clamp(36px, 5vw, 54px); line-height: 1; letter-spacing: -.08em; }.snake-heading h2 span { color: #d94c32; }
+.snake-score { display: flex; flex-direction: column; align-items: end; }.snake-score small { color: #8c8476; font: 9px 'DM Mono', monospace; letter-spacing: .1em; }.snake-score strong { font: 700 29px 'DM Mono', monospace; }
+.snake-layout { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 28px; align-items: start; }
+.snake-board-wrap { min-width: 0; padding: 12px; background: #25231f; border: 2px solid #25231f; box-shadow: 5px 5px 0 #b7aa94; }
+.snake-board { position: relative; display: grid; grid-template-columns: repeat(20, 1fr); aspect-ratio: 1; background: #d8dfc8; gap: 1px; padding: 5px; }
+.snake-cell { min-width: 0; background: rgba(48,60,54,.045); }.snake-head, .snake-body { background: #303c36; border: 1px solid #25231f; }.snake-head { background: #d94c32; border-radius: 3px; }.snake-food { background: #d94c32; border: 2px solid #25231f; border-radius: 50%; }
+.snake-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px; background: rgba(36,34,30,.82); color: #fff8e9; text-align: center; }.snake-overlay strong { color: #f2b544; font: 700 clamp(22px, 4vw, 34px) 'DM Mono', monospace; }.snake-overlay span { font-size: 12px; }.snake-overlay button, .restart-button { padding: 11px 16px; color: #fff8e9; background: #d94c32; border: 2px solid #25231f; border-radius: 2px; font-size: 12px; font-weight: 700; }.snake-overlay button:hover, .restart-button:hover { background: #b93b27; }
+.snake-board-foot { display: flex; justify-content: space-between; gap: 10px; padding: 11px 3px 1px; color: #e8dfcf; font: 8px 'DM Mono', monospace; letter-spacing: .05em; }
+.snake-instructions { position: relative; padding: 22px 18px; background: #eee5d3; border: 2px solid #25231f; }.snake-instructions h3 { margin: 2px 0 9px; font-size: 20px; letter-spacing: -.05em; }.snake-instructions p, .snake-instructions li { color: #777064; font-size: 12px; line-height: 1.65; }.snake-instructions ul { padding-left: 17px; margin: 14px 0 20px; }.instruction-sticker { float: right; margin: -35px -26px 10px 8px; padding: 8px 11px; color: #25231f; background: #f2b544; border: 2px solid #25231f; text-align: center; font: 9px 'DM Mono', monospace; line-height: 1.4; transform: rotate(7deg); }.instruction-sticker b { font-size: 16px; }
+@media (max-width: 700px) { .snake-layout { grid-template-columns: 1fr; }.snake-instructions { display: grid; grid-template-columns: 1fr; }.snake-page { padding-top: 28px; }.snake-board-foot { font-size: 7px; } }
