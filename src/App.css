@@ -145,3 +145,19 @@ footer { min-height: 85px; display: flex; align-items: center; justify-content: 
 .snake-board-foot { display: flex; justify-content: space-between; gap: 10px; padding: 11px 3px 1px; color: #e8dfcf; font: 8px 'DM Mono', monospace; letter-spacing: .05em; }
 .snake-instructions { position: relative; padding: 22px 18px; background: #eee5d3; border: 2px solid #25231f; }.snake-instructions h3 { margin: 2px 0 9px; font-size: 20px; letter-spacing: -.05em; }.snake-instructions p, .snake-instructions li { color: #777064; font-size: 12px; line-height: 1.65; }.snake-instructions ul { padding-left: 17px; margin: 14px 0 20px; }.instruction-sticker { float: right; margin: -35px -26px 10px 8px; padding: 8px 11px; color: #25231f; background: #f2b544; border: 2px solid #25231f; text-align: center; font: 9px 'DM Mono', monospace; line-height: 1.4; transform: rotate(7deg); }.instruction-sticker b { font-size: 16px; }
 @media (max-width: 700px) { .snake-layout { grid-template-columns: 1fr; }.snake-instructions { display: grid; grid-template-columns: 1fr; }.snake-page { padding-top: 28px; }.snake-board-foot { font-size: 7px; } }
+
+
+/* Shared player for externally hosted browser games */
+.embedded-game-page { padding: 42px 0 70px; min-height: 650px; }
+.embedded-game-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
+.embedded-game-heading h2 { margin: 9px 0 0; font-size: clamp(32px, 5vw, 48px); line-height: 1; letter-spacing: -.07em; }
+.fullscreen-button { padding: 10px 13px; color: #fff8e9; background: #25231f; border: 2px solid #25231f; border-radius: 2px; font-size: 11px; font-weight: 700; }
+.fullscreen-button:hover { background: #d94c32; }
+.embedded-game-frame { width: 100%; min-height: 560px; overflow: hidden; background: #25231f; border: 2px solid #25231f; box-shadow: 5px 5px 0 #b7aa94; }
+.embedded-game-frame iframe { display: block; width: 100%; height: min(72vh, 760px); min-height: 560px; border: 0; background: #fff; }
+.embed-note { margin: 16px 0 0; color: #8c8476; font: 10px 'DM Mono', monospace; line-height: 1.6; }
+@media (max-width: 600px) {
+  .embedded-game-page { padding-top: 28px; }
+  .embedded-game-heading { align-items: flex-start; flex-direction: column; }
+  .embedded-game-frame, .embedded-game-frame iframe { min-height: 420px; }
+}
