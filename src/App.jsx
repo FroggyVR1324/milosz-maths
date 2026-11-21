@@ -5,7 +5,7 @@ const categories = ['All games', 'Arcade', 'Action', 'Puzzle', 'Racing']
 const GRID_SIZE = 20
 const START_SNAKE = [{ x: 9, y: 10 }, { x: 8, y: 10 }, { x: 7, y: 10 }]
 
-function SnakeGame() {
+function SnakeGame({ onBack }) {
   const [snake, setSnake] = useState(START_SNAKE)
   const [food, setFood] = useState({ x: 14, y: 10 })
   const [direction, setDirection] = useState({ x: 1, y: 0 })
@@ -82,7 +82,7 @@ function SnakeGame() {
   return (
     <section className="snake-page">
       <div className="snake-topline">
-        <button className="back-button" onClick={() => window.dispatchEvent(new CustomEvent('close-snake'))}>← back to games</button>
+        <button className="back-button" onClick={onBack}>← back to games</button>
         <span className="snake-label">EL CHATO ORIGINAL · #001</span>
       </div>
       <div className="snake-heading">
@@ -121,16 +121,54 @@ function SnakeGame() {
   )
 }
 
+
+const games = [
+  {
+    id: 'snake',
+    title: 'El Chato Snake',
+    description: 'Eat. Grow. Try not to bonk into yourself.',
+    category: 'Arcade',
+    type: 'local',
+    component: SnakeGame,
+  },
+  // Add browser games here with type: 'embed' and a playable game URL.
+]
+
+function GamePlayer({ game, onBack }) {
+  if (game.type === 'embed') {
+    return (
+      <section className="embedded-game-page">
+        <div className="snake-topline">
+          <button className="back-button" onClick={onBack}>← back to games</button>
+          <span className="snake-label">EL CHATO GAMES · NOW PLAYING</span>
+        </div>
+        <div className="embedded-game-heading">
+          <div><div className="section-kicker">{game.category}</div><h2>{game.title}</h2></div>
+          <button className="fullscreen-button" onClick={() => document.querySelector('.embedded-game-frame')?.requestFullscreen?.()}>⛶ fullscreen</button>
+        </div>
+        <div className="embedded-game-frame">
+          <iframe
+            src={game.url}
+            title={game.title}
+            allow="fullscreen; autoplay; gamepad"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        </div>
+        <p className="embed-note">This game is hosted by another website. If it doesn't load, that site may not allow embedding.</p>
+      </section>
+    )
+  }
+
+  const LocalGame = game.component
+  return <LocalGame onBack={onBack} />
+}
+
 function App() {
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('All games')
-  const [gameOpen, setGameOpen] = useState(false)
-
-  useEffect(() => {
-    const close = () => setGameOpen(false)
-    window.addEventListener('close-snake', close)
-    return () => window.removeEventListener('close-snake', close)
-  }, [])
+  const [selectedGame, setSelectedGame] = useState(null)
 
   const showSnake = !search.trim() || 'el chato snake snake arcade'.includes(search.trim().toLowerCase())
   const showGame = activeCategory === 'All games' || activeCategory === 'Arcade'
@@ -144,7 +182,7 @@ function App() {
         <a className="header-button" href="#library">go play ↓</a>
       </header>
       <main id="home">
-        {gameOpen ? <SnakeGame /> : <>
+        {selectedGame ? <GamePlayer game={selectedGame} onBack={() => setSelectedGame(null)} /> : <>
           <section className="hero">
             <div className="hero-content">
               <div className="eyebrow">HEY. YOU LOOK BORED.</div>
@@ -165,12 +203,12 @@ function App() {
             <div className="hero-bottom"><span>NO ACCOUNT NEEDED</span><span>JUST PICK A GAME</span><span>EST. 2026</span></div>
           </section>
           <section className="library-section" id="library">
-            <div className="section-heading"><div><div className="section-kicker">TAKE YOUR PICK</div><h2>The <span>game shelf.</span></h2></div><span className="game-count">1 GAME ON THE SHELF <b>↙</b></span></div>
+            <div className="section-heading"><div><div className="section-kicker">TAKE YOUR PICK</div><h2>The <span>game shelf.</span></h2></div><span className="game-count">{games.length} GAME{games.length === 1 ? '' : 'S'} ON THE SHELF <b>↙</b></span></div>
             <div className="category-row" aria-label="Filter games by category">
               {categories.map((category) => <button className={activeCategory === category ? 'category-chip selected' : 'category-chip'} key={category} onClick={() => setActiveCategory(category)} type="button">{category}</button>)}
             </div>
             {showSnake && showGame ? (
-              <button className="game-card" onClick={() => setGameOpen(true)} type="button">
+              <button className="game-card" onClick={() => setSelectedGame(games[0])} type="button">
                 <div className="game-card-art"><div className="pixel-snake"><i /><i /><i /><i /><b /></div><span className="game-number">NO. 001</span><span className="play-stamp">PLAY ↗</span></div>
                 <div className="game-card-info"><div><h3>El Chato Snake</h3><p>Eat. Grow. Try not to bonk into yourself.</p></div><span className="game-tag">ARCADE</span></div>
               </button>
